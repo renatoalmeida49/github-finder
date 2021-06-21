@@ -68,7 +68,10 @@
       </v-card>
     </v-col>
   </v-row>
-  <v-row v-if="repositories">
+  <v-row
+    v-if="repositories"
+    justify="center"
+  >
     <template v-for="(repository, index) in repositories">
       <Repository :repository="repository" :key="index" />
     </template>
