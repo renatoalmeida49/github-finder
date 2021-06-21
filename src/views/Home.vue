@@ -68,39 +68,48 @@
       </v-card>
     </v-col>
   </v-row>
-
+  <v-row v-if="repositories">
+    <template v-for="(repository, index) in repositories">
+      <Repository :repository="repository" :key="index" />
+    </template>
+  </v-row>
 
 </v-container>
 </template>
 
 <script>
-  
+import Repository from '@/components/Repository'  
 
-  export default {
-    name: 'Home',
-    data() {
-      return {
-        search: null,
-        portfolio: null
+export default {
+  name: 'Home',
+  components: {
+    Repository
+  },
+  data() {
+    return {
+      search: null,
+      portfolio: null,
+      repositories: null
+    }
+  },
+  methods: {
+    getProfile() {
+      if(this.search !== null) {
+        fetch(`https://api.github.com/users/${this.search}`)
+          .then(response => response.json())
+          .then(response => {
+            this.portfolio = response
+            this.getRepositories(response.repos_url)
+          })
       }
     },
-    components: {
-      
-    },
-    methods: {
-      getProfile() {
-        if(this.search !== null) {
-          fetch(`https://api.github.com/users/${this.search}`)
-            .then(response => response.json())
-            .then(response => {
-              this.portfolio = response
-              this.getRepositories()
-            })
-        }
-      },
-      getRepositories() {
-        console.log('Buscando repositórios')
-      }
+    getRepositories(url) {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => {
+          this.repositories = response
+        })
     }
   }
+}
 </script>
