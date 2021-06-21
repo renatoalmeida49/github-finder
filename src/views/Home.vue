@@ -32,23 +32,44 @@
   <v-row v-if="portfolio">
     <v-col
       cols="12"
+      class="mx-auto"
+      align="center"
     >
-      <v-avatar
-        size="62"
+      <v-card
+        max-width="374"
+        align="center"
       >
-        <img :src="portfolio.avatar_url" alt="Foto de perfil" />
-      </v-avatar>
+        <v-avatar
+          size="120"
+        >
+          <img :src="portfolio.avatar_url" alt="Foto de perfil" />
+        </v-avatar>
 
-      <h1>{{ portfolio.name }}</h1>
-      <h2>@{{ portfolio.login }}</h2>
+        <v-card-title
+          align="center"
+          style="justify-content: center"
+        >
+          {{ portfolio.name }}
+        </v-card-title>
 
-      <p>{{ portfolio.bio }}</p>
+        <v-card-text>
+          <div>@{{ portfolio.login }}</div>
 
-      <p><v-icon>mdi-map-marker</v-icon>{{ portfolio.location }}</p>
+          <div>{{ portfolio.bio }}</div>
+        </v-card-text>
 
-      <p><v-icon>mdi-account-multiple</v-icon> {{ portfolio.followers }} seguidores - {{ portfolio.following }} seguindo</p>
+        <v-divider></v-divider>
+
+        <v-card-text>
+          <p><v-icon>mdi-map-marker</v-icon>{{ portfolio.location }}</p>
+
+          <p><v-icon>mdi-account-multiple</v-icon> {{ portfolio.followers }} seguidores - {{ portfolio.following }} seguindo</p>
+        </v-card-text>
+      </v-card>
     </v-col>
   </v-row>
+
+
 </v-container>
 </template>
 
@@ -73,8 +94,12 @@
             .then(response => response.json())
             .then(response => {
               this.portfolio = response
+              this.getRepositories()
             })
         }
+      },
+      getRepositories() {
+        console.log('Buscando repositórios')
       }
     }
   }
