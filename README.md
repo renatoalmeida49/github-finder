@@ -79,7 +79,7 @@ E clique no link gerado no terminal
   
 A barra de pesquisa fica com um tamanho desncessariamente grande
 
-## Author
+## Autor
 
 - Website - [Renato Novaes](https://www.renatonovaes.dev)
 - Instagram - [@novaes_r](https://www.instagram.com/novaes_r)
